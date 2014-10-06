@@ -13,6 +13,8 @@
   define('FRAMEFIX_STEP', 40);
   define('INVALID_TIMESTAMP', -1);
   define('STOP_PROCESSING', 2);
+  
+  define('SCRIPT_VERSION', "1.1.0");
 
   class CLI
     {
@@ -1594,11 +1596,7 @@
 
   function ShowHeader()
     {
-      $header = "KSV Adobe HDS Downloader";
-      $len    = strlen($header);
-      $width  = floor((80 - $len) / 2) + $len;
-      $format = "\n%" . $width . "s\n\n";
-      printf($format, $header);
+      printf("KSV Adobe HDS Downloader\n\n");
     }
 
   function WriteFlvFile($outFile, $audio = true, $video = true)
@@ -1707,6 +1705,7 @@
           'fproxy' => 'force proxy for downloading of fragments',
           'play' => 'dump stream to stdout for piping to media player',
           'rename' => 'rename fragments sequentially before processing',
+          'version' => 'display script version',
       ),
       1 => array(
           'auth' => 'authentication string for fragment requests',
@@ -1743,6 +1742,12 @@
       $cli->displayHelp();
       exit(0);
     }
+    
+  if ($cli->getParam('version')){
+    LogInfo(sprintf("Version %s", SCRIPT_VERSION));
+    exit(0);
+  }
+    
 
   // Check for required extensions
   $extensions = array(
