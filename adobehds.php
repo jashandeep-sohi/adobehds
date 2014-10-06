@@ -1698,7 +1698,6 @@
   $rename       = false;
   $showHeader   = true;
   $start        = 0;
-  $update       = false;
 
   $options = array(
       0 => array(
@@ -1708,7 +1707,6 @@
           'fproxy' => 'force proxy for downloading of fragments',
           'play' => 'dump stream to stdout for piping to media player',
           'rename' => 'rename fragments sequentially before processing',
-          'update' => 'update the script to current git version'
       ),
       1 => array(
           'auth' => 'authentication string for fragment requests',
@@ -1781,8 +1779,6 @@
       $cc->fragProxy = true;
   if ($cli->getParam('rename'))
       $rename = $cli->getParam('rename');
-  if ($cli->getParam('update'))
-      $update = true;
   if ($cli->getParam('auth'))
       $f4f->auth = '?' . $cli->getParam('auth');
   if ($cli->getParam('duration'))
@@ -1819,24 +1815,6 @@
   // X-Forwareded-For header    
   if ($cli->getParam('forwarded'))
       $cc->headers[] = "X-Forwarded-For: " . gethostbyname($cli->getParam("forwarded"));
-
-  // Update the script
-  if ($update)
-    {
-      LogInfo("Updating script....");
-      $status = $cc->get("https://raw.github.com/K-S-V/Scripts/master/AdobeHDS.php");
-      if ($status == 200)
-        {
-          if (md5($cc->response) == md5(file_get_contents($argv[0])))
-              LogError("You are already using the latest version of this script.", 0);
-          $status = file_put_contents($argv[0], $cc->response);
-          if (!$status)
-              LogError("Failed to write script file");
-          LogError("Script has been updated successfully.", 0);
-        }
-      else
-          LogError("Failed to update script");
-    }
 
   // Create output directory
   if ($outDir)
