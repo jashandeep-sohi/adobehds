@@ -14,7 +14,7 @@
   define('INVALID_TIMESTAMP', -1);
   define('STOP_PROCESSING', 2);
   
-  define('SCRIPT_VERSION', "1.1.0");
+  define('SCRIPT_VERSION', "1.1.1");
 
   class CLI
     {
@@ -620,7 +620,7 @@
               LogDebug("Update complete, Available fragments: " . $this->fragCount);
               if ($fragNum == $this->fragCount)
                 {
-                  LogInfo("Updating bootstrap info, Retries: " . ++$retries, true);
+                  LogInfo("Updating bootstrap info, Retries: " . ++$retries, false);
                   usleep(4000000);
                 }
             }
@@ -1722,7 +1722,7 @@
           'referrer' => 'Referer to use for emulation of browser requests',
           'start' => 'start from specified fragment',
           'useragent' => 'User-Agent to use for emulation of browser requests',
-          'forwarded' => 'Host name to forward for.'
+          'forwarded' => 'Hostname to forward for (X-Forwarded-For). ',
       )
   );
   $cli     = new CLI($options, true);
