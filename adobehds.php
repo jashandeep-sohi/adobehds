@@ -620,8 +620,7 @@
               LogDebug("Update complete, Available fragments: " . $this->fragCount);
               if ($fragNum == $this->fragCount)
                 {
-                  LogInfo("");
-                  LogInfo("Updating bootstrap info, Retries: " . ++$retries, false);
+                  LogDebug("Updating bootstrap info, Retries: " . ++$retries);
                   usleep(4000000);
                 }
             }
