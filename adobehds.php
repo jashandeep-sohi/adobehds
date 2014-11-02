@@ -1499,7 +1499,7 @@
 
   function LogError($msg, $code = 1)
     {
-      LogInfo($msg);
+      LogInfo("\nERROR: ".$msg);
       exit($code);
     }
 
@@ -1542,11 +1542,12 @@
     {
       if ($msg)
         {
-          printf("\r%-79s\r", "");
-          if ($progress)
-              printf("%s\r", $msg);
-          else
+          if ($progress){
+              printf("\r%-79s\r", "");
+              printf("%s", $msg);
+          }else{
               printf("%s\n", $msg);
+          }
         }
       else
           printf("\n");
