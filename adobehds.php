@@ -1765,7 +1765,7 @@
           'referrer' => 'Referer to use for emulation of browser requests',
           'start' => 'start from specified fragment',
           'useragent' => 'User-Agent to use for emulation of browser requests',
-          'forwarded' => 'Hostname to forward for (X-Forwarded-For). ',
+          'forwarded' => 'Hostname to forward for (X-Forwarded-For HTTP header)',
       )
   );
   $cli     = new CLI($options, true);
